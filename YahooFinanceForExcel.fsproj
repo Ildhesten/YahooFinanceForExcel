@@ -25,8 +25,8 @@
     <DocumentationFile>bin\Debug\YahooFinanceForExcel.XML</DocumentationFile>
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE</StartProgram>
-    <StartArguments>E:\Projects\YahooFinanceForExcel\YahooFinanceForExcel\bin\Debug\YahooFinanceForExcel-AddIn64.xll</StartArguments>
-    <StartWorkingDirectory>E:\Projects\YahooFinanceForExcel\YahooFinanceForExcel\bin\Debug\</StartWorkingDirectory>
+    <StartArguments>C:\Users\killi\Documents\GitHubVisualStudio\YahooFinanceForExcel\bin\Debug\YahooFinanceForExcel-AddIn64.xll</StartArguments>
+    <StartWorkingDirectory>C:\Users\killi\Documents\GitHubVisualStudio\YahooFinanceForExcel\bin\Debug</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

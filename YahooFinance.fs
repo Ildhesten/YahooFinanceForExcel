@@ -48,7 +48,7 @@ module YahooFinance =
   let YahooGetHistoricalPricesExn (symbol : string) (granularity : string) (startDate : DateTime) (endDate : DateTime) =
     let encodedUrl = HttpUtility.UrlEncode(symbol)
     let encodedGranularity = HttpUtility.UrlEncode(granularity)
-    let requestString = sprintf "http://real-chart.finance.yahoo.com/table.csv?s=%s&g=%s&a=%d&b=%d&c=%d&d=%d&e=%d&f=%d" encodedUrl granularity startDate.Year startDate.Month startDate.Day endDate.Year endDate.Month endDate.Day
+    let requestString = sprintf "http://real-chart.finance.yahoo.com/table.csv?s=%s&g=%s&a=%d&b=%d&c=%d&d=%d&e=%d&f=%d" encodedUrl granularity (startDate.Month - 1) startDate.Day startDate.Year (endDate.Month - 1) endDate.Day endDate.Year
     in
       GetCsvDataExn requestString []
 
