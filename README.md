@@ -19,7 +19,7 @@ The returned array is not in any way interpreted by the addin, this means that d
 Will attempt to fetch the latest quote details for a given symbol. This includes the name, symbol, last price, opening price, previous closing price, and the high and low price. The function only takes on parameter which is the given symbol.  
 Symbol: The symbol to fetch the data for, e.g., AAPL for Apple.
 
-#### YahooGetSectorOverview()
+#### YahooGetSectorOverview:
 This function will return an overview of different sectors on Yahoo finance, containing different data such as, price change, P/E, Price to Book value, etc. This function takes no parameters.
 
 ### Running the add-in:
