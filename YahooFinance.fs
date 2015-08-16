@@ -8,8 +8,6 @@ module YahooFinance =
 
   open ExcelDna.Integration
 
-  type t = Dummy
-
   let findLongestRow (rows : string [] []) =
     Array.fold (fun a (x : string[]) -> max a x.Length) 0 rows
 

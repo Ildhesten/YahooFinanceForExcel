@@ -5,8 +5,6 @@
 
     open ExcelDna.Integration
 
-    type t = Dummy
-
     [<ExcelFunction(Description="Gets quote data from Yahoo Finance")>]
     val YahooGetQuoteDetails : symbol : string -> obj[,]
 
