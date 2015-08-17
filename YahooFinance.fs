@@ -42,13 +42,28 @@ module YahooFinance =
         |> List.toArray
       end
 
-
-  let YahooGetHistoricalPricesExn (symbol : string) (granularity : string) (startDate : DateTime) (endDate : DateTime) =
+  let YahooGetHistoricalPricesExn (symbol : string) (granularity : string) (startDate : DateTime) (endDate : DateTime) =    
     let encodedUrl = HttpUtility.UrlEncode(symbol)
     let encodedGranularity = HttpUtility.UrlEncode(granularity)
     let requestString = sprintf "http://real-chart.finance.yahoo.com/table.csv?s=%s&g=%s&a=%d&b=%d&c=%d&d=%d&e=%d&f=%d" encodedUrl granularity (startDate.Month - 1) startDate.Day startDate.Year (endDate.Month - 1) endDate.Day endDate.Year
     in
       GetCsvDataExn requestString []
+
+
+  let mutable cache = Map.empty
+
+  let YahooGetHistoricalPricesCachedExn (symbol : string) (granularity : string) (startDate : DateTime) (endDate : DateTime) =
+    let key = (symbol, granularity, startDate, endDate)
+    in
+      if Map.containsKey key cache then
+        Map.find key cache
+      else
+        let prices = YahooGetHistoricalPricesExn symbol granularity startDate endDate
+        in
+          begin
+            cache <- Map.add key prices cache
+            prices
+          end
 
   let YahooGetSectorOverviewExn () =
     let requestString = "http://biz.yahoo.com/p/csv/s_conameu.csv"
@@ -61,7 +76,7 @@ module YahooFinance =
     ([<ExcelArgument(Name="Symbol", Description="d for daily, w for weekly, m for monthly.")>] granularity : string) 
     ([<ExcelArgument(Name="StartDate", Description="The start date of the range.")>] startDate : DateTime) 
     ([<ExcelArgument(Name="EndDate", Description="The end date of the range")>] endDate : DateTime) =
-      convertToArray2d (fun () -> YahooGetHistoricalPricesExn symbol granularity startDate endDate)            
+      convertToArray2d (fun () -> YahooGetHistoricalPricesCachedExn symbol granularity startDate endDate)            
 
   [<ExcelFunction(Description="Gets a sector overview from YahooFinance.")>]
   let YahooGetSectorOverview () =
